@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">republic</string>
+    <string name="back_button">Back</string>
+    <string name="error">An Error Occurred</string>
+</resources>
