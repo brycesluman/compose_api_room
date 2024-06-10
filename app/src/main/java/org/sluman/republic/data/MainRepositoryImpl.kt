@@ -11,10 +11,9 @@ class MainRepositoryImpl(private val apiClient: ApiClient,
                          private val routeDao: RouteDao
     ): MainRepository {
     override suspend fun fetchDriversAndRoutesReturnDrivers(): List<DriverDomainEntity>? {
-        val drivers =  driverDao.getAll()
-        if (drivers?.isEmpty() == true) {
+        val drivers = driverDao.getAll()
+        if (drivers?.size == 0) {
             val response = apiClient.apiService.getDriversAndRoutes()
-            println(response.drivers)
             response.drivers.map {
                 it.toCache().let { item ->
                     driverDao.insert(item)
@@ -25,11 +24,8 @@ class MainRepositoryImpl(private val apiClient: ApiClient,
                     routeDao.insert(item)
                 }
             }
-            return drivers.map {
-                it.toDomain()
-            }
         }
-        return drivers?.map {
+        return driverDao.getAll()?.map {
             it.toDomain()
         }
     }
