@@ -1,30 +1,21 @@
 package org.sluman.republic.data
 
+import org.sluman.republic.database.RouteCacheEntity
 import org.sluman.republic.database.RouteDao
 import org.sluman.republic.domain.RouteDomainEntity
 import org.sluman.republic.domain.RouteRepository
 
 class RouteRepositoryImpl(
     private val dao: RouteDao
-): RouteRepository {
-    override suspend fun getRouteForDriver(driverId: String): RouteDomainEntity? {
-        return dao.get(getRouteId(driverId))?.toDomain()
+) : RouteRepository {
+    override suspend fun getRouteForDriver(routeId: Int): RouteDomainEntity? {
+        return dao.get(routeId)?.toDomain()
     }
 
-    private suspend fun getRouteId(driverId: String): Int {
-        val inCache = dao.get(driverId.toInt())
-        if (inCache!= null) {
-            return inCache.id
-        }
-
-        if (driverId.toInt()%2 == 0) {
-            return dao.get("R")[0].id
-        }
-
-        if (driverId.toInt()%5 == 0) {
-            return dao.get("C")[0].id
-        }
-
-        return dao.get("I")[0].id
+    override suspend fun getRouteById(routeId: Int): RouteCacheEntity? {
+        return dao.get(routeId)
+    }
+    override suspend fun getRouteByType(routeType: String): List<RouteCacheEntity> {
+        return dao.get(routeType)
     }
 }

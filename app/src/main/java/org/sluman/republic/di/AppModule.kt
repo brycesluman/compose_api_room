@@ -13,8 +13,11 @@ import org.sluman.republic.data.network.ApiClient
 import org.sluman.republic.database.DriverDao
 import org.sluman.republic.database.RepublicDatabase
 import org.sluman.republic.database.RouteDao
+import org.sluman.republic.domain.FetchDriversAndRoutesUseCase
+import org.sluman.republic.domain.GetRouteUseCase
 import org.sluman.republic.domain.MainRepository
 import org.sluman.republic.domain.RouteRepository
+import org.sluman.republic.domain.SortDriversUseCase
 import javax.inject.Singleton
 
 @Module
@@ -63,5 +66,23 @@ object AppModule {
     @Singleton
     fun provideRouteRepository(routeDao: RouteDao): RouteRepository {
         return RouteRepositoryImpl(routeDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchDriverAndRoutesUseCase(mainRepository: MainRepository): FetchDriversAndRoutesUseCase {
+        return FetchDriversAndRoutesUseCase(mainRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRouteUseCase(routeRepository: RouteRepository): GetRouteUseCase {
+        return GetRouteUseCase(routeRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSortDriversUseCase(mainRepository: MainRepository): SortDriversUseCase {
+        return SortDriversUseCase(mainRepository)
     }
 }

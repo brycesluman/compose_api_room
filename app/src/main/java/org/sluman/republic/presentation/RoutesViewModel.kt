@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sluman.republic.data.RouteUiState
+import org.sluman.republic.domain.GetRouteUseCase
 import org.sluman.republic.domain.RouteRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class RoutesViewModel @Inject constructor(
-    private val repository: RouteRepository
+    private val getRouteUseCase: GetRouteUseCase
 ): ViewModel() {
     private val _uiState = MutableStateFlow(RouteUiState())
     val uiState: StateFlow<RouteUiState> = _uiState.asStateFlow()
@@ -24,7 +25,7 @@ class RoutesViewModel @Inject constructor(
         )
         viewModelScope.launch {
             try {
-                val route = repository.getRouteForDriver(id)
+                val route = getRouteUseCase(id)
                 _uiState.value = uiState.value.copy(
                     isError = false,
                     isLoading = false,

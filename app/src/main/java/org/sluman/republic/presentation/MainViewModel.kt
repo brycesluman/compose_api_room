@@ -8,12 +8,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sluman.republic.data.MainUiState
+import org.sluman.republic.domain.FetchDriversAndRoutesUseCase
 import org.sluman.republic.domain.MainRepository
+import org.sluman.republic.domain.SortDriversUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val sortDriversUseCase: SortDriversUseCase,
+    private val fetchDriversAndRoutesUseCase: FetchDriversAndRoutesUseCase
 ): ViewModel() {
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
@@ -24,7 +27,7 @@ class MainViewModel @Inject constructor(
         )
         viewModelScope.launch {
             try {
-                val drivers = repository.fetchDriversAndRoutesReturnDrivers()
+                val drivers = fetchDriversAndRoutesUseCase()
                 _uiState.value = uiState.value.copy(
                     isError = false,
                     isLoading = false,
@@ -42,8 +45,15 @@ class MainViewModel @Inject constructor(
     }
 
     fun sortList() {
-        _uiState.value = uiState.value.copy(
-            sortedAsc = !_uiState.value.sortedAsc
-        )
+        println("sortList")
+        viewModelScope.launch {
+            val drivers = sortDriversUseCase()
+            println("drivers $drivers")
+            _uiState.value = uiState.value.copy(
+                isError = false,
+                isLoading = false,
+                drivers = drivers
+            )
+        }
     }
 }

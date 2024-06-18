@@ -28,18 +28,11 @@ fun DriversScreen(modifier: Modifier,
                   onItemClicked: (id: String, name: String) -> Unit,
                   state: State<MainUiState>) {
 
-    val driverList = state.value.drivers?.let { drivers ->
-        if (state.value.sortedAsc) {
-            drivers.sortedWith(compareBy { it.name.split(" ")[1] })
-        } else {
-            drivers.sortedWith(compareBy { it.name.split(" ")[1] }).asReversed()
-        }
-    }
     Box(modifier = modifier.fillMaxHeight().padding(16.dp)) {
 
         LazyColumn {
-            driverList?.let {
-                items(driverList) { item ->
+            state.value.drivers?.let {
+                items(it) { item ->
                     Row(modifier = Modifier
                         .clickable {
                             onItemClicked(item.id, item.name)
