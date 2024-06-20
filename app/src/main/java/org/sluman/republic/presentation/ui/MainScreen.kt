@@ -70,7 +70,7 @@ fun MainScreenRoot(
         ) {
             composable<DriversList> {
                 DriversScreen(
-                    onItemClicked = {id, name ->
+                    onItemClicked = { id, name ->
                         topBarTitle.value = name
                         navController.navigate(
                             RouteList(
@@ -152,9 +152,11 @@ fun AppBar(
         }
     )
 }
+
 @Composable
 fun ErrorMessage(message: String, modifier: Modifier) {
-    Text(text = message,
+    Text(
+        text = message,
         color = MaterialTheme.colorScheme.error,
         modifier = modifier.padding(16.dp)
     )

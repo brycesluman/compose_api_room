@@ -9,13 +9,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sluman.republic.data.RouteUiState
 import org.sluman.republic.domain.GetRouteUseCase
-import org.sluman.republic.domain.RouteRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class RoutesViewModel @Inject constructor(
     private val getRouteUseCase: GetRouteUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _uiState = MutableStateFlow(RouteUiState())
     val uiState: StateFlow<RouteUiState> = _uiState.asStateFlow()
 

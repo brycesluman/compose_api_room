@@ -6,10 +6,11 @@ import org.sluman.republic.database.RouteDao
 import org.sluman.republic.domain.DriverDomainEntity
 import org.sluman.republic.domain.MainRepository
 
-class MainRepositoryImpl(private val apiClient: ApiClient,
-                         private val driverDao: DriverDao,
-                         private val routeDao: RouteDao
-    ): MainRepository {
+class MainRepositoryImpl(
+    private val apiClient: ApiClient,
+    private val driverDao: DriverDao,
+    private val routeDao: RouteDao
+) : MainRepository {
 
     override var sortedAsc = true
     override suspend fun fetchDriversAndRoutesReturnDrivers(): List<DriverDomainEntity>? {

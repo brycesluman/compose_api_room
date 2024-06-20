@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "drivers")
 data class DriverCacheEntity(
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name= "id")
-    val id   : String,
-    @ColumnInfo(name= "name")
-    val name : String
+    @ColumnInfo(name = "id")
+    val id: String,
+    @ColumnInfo(name = "name")
+    val name: String
 )

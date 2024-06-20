@@ -24,11 +24,15 @@ import org.sluman.republic.R
 import org.sluman.republic.data.MainUiState
 
 @Composable
-fun DriversScreen(modifier: Modifier,
-                  onItemClicked: (id: String, name: String) -> Unit,
-                  state: State<MainUiState>) {
+fun DriversScreen(
+    modifier: Modifier,
+    onItemClicked: (id: String, name: String) -> Unit,
+    state: State<MainUiState>
+) {
 
-    Box(modifier = modifier.fillMaxHeight().padding(16.dp)) {
+    Box(modifier = modifier
+        .fillMaxHeight()
+        .padding(16.dp)) {
 
         LazyColumn {
             state.value.drivers?.let {
@@ -44,8 +48,10 @@ fun DriversScreen(modifier: Modifier,
                             fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.weight(1f)
                         )
-                        Text(text = item.name,
-                            modifier = Modifier.weight(1f))
+                        Text(
+                            text = item.name,
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                     HorizontalDivider(thickness = .5.dp)
                 }

@@ -9,7 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitClient() {
     val retrofit: Retrofit by lazy {
         val builder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) { builder.addInterceptor(OkHttpProfilerInterceptor()) }
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(OkHttpProfilerInterceptor())
+        }
         val client = builder.build()
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -17,6 +19,7 @@ class RetrofitClient() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
     companion object {
         private const val BASE_URL = "https://d49c3a78-a4f2-437d-bf72-569334dea17c.mock.pstmn.io/"
     }

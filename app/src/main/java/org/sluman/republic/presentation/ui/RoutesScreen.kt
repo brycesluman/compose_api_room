@@ -20,15 +20,21 @@ import org.sluman.republic.R
 import org.sluman.republic.data.RouteUiState
 
 @Composable
-fun RoutesScreen(modifier: Modifier,
-                 state: State<RouteUiState>
+fun RoutesScreen(
+    modifier: Modifier,
+    state: State<RouteUiState>
 ) {
-    Box(modifier = modifier.fillMaxSize().padding(16.dp)) {
-        Column(modifier = Modifier.fillMaxSize(),
+    Box(modifier = modifier
+        .fillMaxSize()
+        .padding(16.dp)) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             state.value.route?.let { route ->
-                Text(text = route.name,
+                Text(
+                    text = route.name,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                 )

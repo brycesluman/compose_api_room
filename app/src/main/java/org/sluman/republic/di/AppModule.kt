@@ -56,9 +56,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDriverRepository(apiClient: ApiClient,
-                                driverDao: DriverDao,
-                                routeDao: RouteDao): MainRepository {
+    fun provideDriverRepository(
+        apiClient: ApiClient,
+        driverDao: DriverDao,
+        routeDao: RouteDao
+    ): MainRepository {
         return MainRepositoryImpl(apiClient, driverDao, routeDao)
     }
 

@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "routes")
 data class RouteCacheEntity(
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name= "id")
-    val id   : Int,
-    @ColumnInfo(name= "type")
-    val type : String,
-    @ColumnInfo(name= "name")
-    val name : String
+    @ColumnInfo(name = "id")
+    val id: Int,
+    @ColumnInfo(name = "type")
+    val type: String,
+    @ColumnInfo(name = "name")
+    val name: String
 )

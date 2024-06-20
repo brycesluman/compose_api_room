@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sluman.republic.data.MainUiState
 import org.sluman.republic.domain.FetchDriversAndRoutesUseCase
-import org.sluman.republic.domain.MainRepository
 import org.sluman.republic.domain.SortDriversUseCase
 import javax.inject.Inject
 
@@ -17,7 +16,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val sortDriversUseCase: SortDriversUseCase,
     private val fetchDriversAndRoutesUseCase: FetchDriversAndRoutesUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
